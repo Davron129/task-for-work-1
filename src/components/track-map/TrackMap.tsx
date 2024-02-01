@@ -58,7 +58,7 @@ export const TrackMap: FC<Props> = ({
 
 {
                 parkingPins.map((pin, idx) => (
-                    <Marker position={[pin.lon, pin.lat]} key={idx} />
+                    <Marker position={[pin.lon, pin.lat]} key={idx} icon={L.icon({ iconUrl: '/marker.png', iconSize: [25, 41] })} />
                 ))
             }            
 
