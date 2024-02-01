@@ -26,7 +26,7 @@ export const Drawer: FC<DrawerProps> = ({
         },
     });
 
-    const handleClickHandleMarker = () => {
+    const handleClickMarker = () => {
         drawPolygon();
     }
 
@@ -42,7 +42,7 @@ export const Drawer: FC<DrawerProps> = ({
                                     center={position}
                                     key={idx} 
                                     eventHandlers={{
-                                        click: handleClickHandleMarker
+                                        click: handleClickMarker
                                     }}    
                                 />
                             ))

@@ -1,10 +1,10 @@
 import * as L from "leaflet";
 import { FC, useState } from "react";
-import { TileLayer, MapContainer, Marker, Polygon } from "react-leaflet"
-import Control from "./Control";
-import { PiPolygon } from "react-icons/pi";
 import { GrUndo } from "react-icons/gr";
 import { FaCheck } from "react-icons/fa6";
+import { PiPolygon } from "react-icons/pi";
+import { TileLayer, MapContainer, Marker, Polygon } from "react-leaflet"
+import Control from "./Control";
 import { Drawer } from "./Drawer";
 
 const defaultCenter: L.LatLngTuple = [41.311081, 69.240562];
@@ -32,6 +32,11 @@ export const PolygonDrawer: FC<Props> = ({
         if(linePos.length > 0) {
             setLinePos(linePos.slice(0, -1));
         }
+    }
+
+    const handleClickStartDrawing = () => {
+        setLinePos([]);
+        setIsDrawable(true);
     }
 
     const handleFinishDrawing = () => {
@@ -71,9 +76,7 @@ export const PolygonDrawer: FC<Props> = ({
                 <div className="flex flex-row gap-2">
                     <button 
                         className="w-8 h-8 bg-white border border-slate-100 shadow-neutral-900 flex items-center justify-center rounded"
-                        onClick={() => {
-                            setIsDrawable(true);
-                        }}    
+                        onClick={handleClickStartDrawing}    
                     >
                         <PiPolygon size={24} />
                     </button>
