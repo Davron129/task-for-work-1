@@ -1,10 +1,11 @@
 import * as L from "leaflet";
-import { Dispatch, FC, SetStateAction, useState } from "react";
-import { TileLayer, MapContainer, Marker, Polyline, Polygon, useMapEvents, CircleMarker } from "react-leaflet"
+import { FC, useState } from "react";
+import { TileLayer, MapContainer, Marker, Polygon } from "react-leaflet"
 import Control from "./Control";
 import { PiPolygon } from "react-icons/pi";
 import { GrUndo } from "react-icons/gr";
 import { FaCheck } from "react-icons/fa6";
+import { Drawer } from "./Drawer";
 
 const defaultCenter: L.LatLngTuple = [41.311081, 69.240562];
 
@@ -31,6 +32,10 @@ export const PolygonDrawer: FC<Props> = ({
         if(linePos.length > 0) {
             setLinePos(linePos.slice(0, -1));
         }
+    }
+
+    const handleFinishDrawing = () => {
+        drawPolygon();
     }
 
     return (
@@ -81,7 +86,10 @@ export const PolygonDrawer: FC<Props> = ({
                                 >
                                     <GrUndo size={24} />
                                 </button>
-                                <button className="w-8 h-8 bg-white border border-slate-100 shadow-neutral-900 flex items-center justify-center rounded">
+                                <button 
+                                    className="w-8 h-8 bg-white border border-slate-100 shadow-neutral-900 flex items-center justify-center rounded"
+                                    onClick={handleFinishDrawing}    
+                                >
                                     <FaCheck size={24} />
                                 </button>
                             </>
@@ -91,58 +99,4 @@ export const PolygonDrawer: FC<Props> = ({
             </Control>
         </MapContainer>
     )
-}
-
-interface DrawerProps {
-    drawPolygon: () => void;
-    isDrawable: boolean,
-    setIsDrawable: Dispatch<SetStateAction<boolean>>,
-    pos: L.LatLngTuple[],
-    setPos: Dispatch<SetStateAction<L.LatLngTuple[]>>
-}
-
-const Drawer: FC<DrawerProps> = ({
-    drawPolygon,
-    isDrawable,
-    pos,
-    setPos
-}) => {
-    const map = useMapEvents({
-        click: (e) => {
-            console.log("map clicked")
-            if(isDrawable) {
-                const { lat, lng } = e.latlng;
-                setPos([...pos, [lat, lng]]);
-            } else {
-                setPos([])
-            }
-        },
-    });
-
-    const handleClickHandleMarker = () => {
-        drawPolygon();
-    }
-
-    return (
-        <div>
-            {
-                pos.length > 0 && isDrawable ? (
-                    <>
-                        <Polyline positions={pos} />
-                        {
-                            pos.map((position, idx) => (
-                                <CircleMarker
-                                    center={position}
-                                    key={idx} 
-                                    eventHandlers={{
-                                        click: handleClickHandleMarker
-                                    }}    
-                                />
-                            ))
-                        }
-                    </>
-                ) : null
-            }
-        </div>
-    );
 }
