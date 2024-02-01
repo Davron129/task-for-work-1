@@ -47,11 +47,14 @@ export const UsersPage = () => {
             ]);
         }
         setIsModalOpen(false);
+        alert("Saved!")
     }
 
     const handleUserDelete = (userId: string) => {
-        const res = users.filter((user) => user.id !== userId);
-        setUsers(res);
+        if(confirm("Confirm Delete")) {
+            const res = users.filter((user) => user.id !== userId);
+            setUsers(res);
+        }
     }
     
     // generate fake data
