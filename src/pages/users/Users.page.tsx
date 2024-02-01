@@ -2,15 +2,59 @@ import { useEffect, useState } from "react"
 import { createRandomUser } from "../../shared/utils"
 import { IUser } from "../../shared/models"
 import { Modal } from "../../shared/components/modal";
+import { USER_DEFAULT_VALUE } from "../../features/user";
+import { UsersForm } from "../../features/user/components";
+import { faker } from "@faker-js/faker";
 
 export const UsersPage = () => {
     const [users, setUsers] = useState<IUser[]>([]);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [modalTitle, setModalTitle] = useState<string>("");
+    const [user, setUser] = useState<IUser>(USER_DEFAULT_VALUE);
 
     const handleClickAdd = () => {
         setIsModalOpen(true);
+        setModalTitle("Create new User");
+        setUser(USER_DEFAULT_VALUE);
+    }
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    }
+
+    const handleClickEdit = (user: IUser) => {
+        setModalTitle("Update User")
+        setIsModalOpen(true);
+        setUser(user);
+    }
+
+    const onSuccess = (value: IUser) => {
+        if(value.id) {
+            setUsers(users.map((user) => {
+                if(user.id === value.id) {
+                    return value
+                }
+                return user
+            }))
+        } else {
+            setUsers([
+                ...users,
+                {
+                    ...value,
+                    id: faker.string.uuid()
+    
+                }
+            ]);
+        }
+        setIsModalOpen(false);
+    }
+
+    const handleUserDelete = (userId: string) => {
+        const res = users.filter((user) => user.id !== userId);
+        setUsers(res);
     }
     
+    // generate fake data
     useEffect(() => {
         const arr = [];
         for(let i=0; i<5; i++) {
@@ -79,8 +123,8 @@ export const UsersPage = () => {
                                         { user.language ?? "-" }
                                     </td>
                                     <td className="px-6 py-4">
-                                        <a href="#" className="mr-2 font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                        <a href="#" className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                                        <a href="#" onClick={() => handleClickEdit(user)} className="mr-2 font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        <a href="#" onClick={() => handleUserDelete(user.id as string)} className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
                                     </td>
                                 </tr>
                             ))
@@ -93,8 +137,14 @@ export const UsersPage = () => {
                 isModalOpen && (
                     <Modal 
                         modalId={"crud-modal"}
-                        title="Create New User"
-                    />
+                        title={modalTitle}
+                        onClose={handleCloseModal}
+                    >
+                        <UsersForm
+                            defaultValues={user}
+                            onSuccess={onSuccess} 
+                        />
+                    </Modal>
                 )
             }
         </div>
