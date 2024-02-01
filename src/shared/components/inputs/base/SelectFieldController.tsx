@@ -1,6 +1,6 @@
 import { FC, useId } from "react"
 import { Control, Controller } from "react-hook-form";
-import { IOption } from "../../models/IOption";
+import { IOption } from "../../../models/IOption";
 
 export interface SelectFieldControllerProps {
     control: Control<any>
@@ -23,9 +23,9 @@ export const SelectFieldController: FC<SelectFieldControllerProps> = ({ control,
                 render={({ field, fieldState: { error } }) => (
                     <>
                         {
-                            props.label && <label htmlFor={id} className={props.labelClasses ?? "text-lg text-slate-500"}>{ props.label }</label>                
+                            props.label && <label htmlFor={id} className={props.labelClasses ?? "block mb-2 text-sm font-medium text-gray-900"}>{ props.label }</label>                
                         }
-                        <select id={id} {...field} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                        <select id={id} {...field} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
                             <option>Tanlang</option>
 
                             {

@@ -1,4 +1,4 @@
-import data from '../../shared/data.json'
+import data from '../../shared/mock-data/data.json'
 import { TrackMap } from '../../components/track-map';
 import { IkmlPlacemarkList } from '../../shared/models';
 

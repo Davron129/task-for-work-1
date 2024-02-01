@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker"
 import { IUser } from "../models"
 
-const langs = [
+export const langs = [
     "English",
     "Russian",
     "Uzbek"
