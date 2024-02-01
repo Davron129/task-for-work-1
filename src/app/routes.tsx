@@ -1,8 +1,9 @@
 import { RouteObject } from "react-router-dom";
-import { ROUTE_HOME, ROUTE_POLYGON_DRAWER, ROUTE_TRACK_MAP } from "../shared/constants";
+import { ROUTE_HOME, ROUTE_POLYGON_DRAWER, ROUTE_TRACK_MAP, ROUTE_USERS } from "../shared/constants";
 import { Layout } from "../shared/layouts";
 import { TrackMapPage } from "../pages/track-map";
 import { PolygonDrawerPage } from "../pages/polygon-drawer";
+import { UsersPage } from "../pages/users";
 
 export const routes: RouteObject[] = [
     {
@@ -21,6 +22,10 @@ export const routes: RouteObject[] = [
                 path: ROUTE_POLYGON_DRAWER,
                 element: <PolygonDrawerPage />
             },
+            {
+                path: ROUTE_USERS,
+                element: <UsersPage />
+            }
         ]
     }
 ] 
