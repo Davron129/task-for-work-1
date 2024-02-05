@@ -1,1 +1,2 @@
-export * from './PolygonDrawer'
+export * from './control'
+export * from './drawer'

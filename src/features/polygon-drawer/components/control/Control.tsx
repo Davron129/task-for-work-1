@@ -16,7 +16,7 @@ const POSITION_CLASSES = {
   topright: 'leaflet-top leaflet-right',
 }
 
-const Control = (props: Props): JSX.Element => {
+export const Control = (props: Props): JSX.Element => {
   const [portalRoot, setPortalRoot] = React.useState<any>(document.createElement('div'))
   const positionClass = ((props.position && POSITION_CLASSES[props.position]) || POSITION_CLASSES.topright)
   const controlContainerRef = React.createRef<HTMLDivElement>()
@@ -57,5 +57,3 @@ const Control = (props: Props): JSX.Element => {
     </div>
   )
 }
-
-export default Control
