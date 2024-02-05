@@ -1,1 +1,1 @@
-export * from './Users.page'
+export * from './UsersPage'

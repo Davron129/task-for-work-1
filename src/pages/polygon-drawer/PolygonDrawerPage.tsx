@@ -6,17 +6,10 @@ import { PiPolygon } from "react-icons/pi";
 import { TileLayer, MapContainer, Marker, Polygon } from "react-leaflet"
 import { Control, Drawer } from "../../features/polygon-drawer";
 
-const defaultCenter: L.LatLngTuple = [41.311081, 69.240562];
+const center: L.LatLngTuple = [41.311081, 69.240562];
+const zoom = 15;
 
-interface Props {
-    zoom?: number;
-    center?: L.LatLngTuple
-}
-
-export const PolygonDrawer: FC<Props> = ({
-    zoom = 15,
-    center = defaultCenter
-}) => {
+export const PolygonDrawer: FC = () => {
     const [pos, setPos] = useState<L.LatLngTuple[][]>([]);
     const [linePos, setLinePos] = useState<L.LatLngTuple[]>([]);
     const [isDrawable, setIsDrawable] = useState<boolean>(false);
@@ -52,7 +45,7 @@ export const PolygonDrawer: FC<Props> = ({
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={defaultCenter} icon={L.icon({ iconUrl: '/marker.png', iconSize: [25, 41] })} />
+            <Marker position={center} icon={L.icon({ iconUrl: '/marker.png', iconSize: [25, 41] })} />
 
             {
                 pos.map((position, idx) => (

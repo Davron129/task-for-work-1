@@ -1,1 +1,1 @@
-export * from './PolygonDrawer.page'
+export * from './PolygonDrawerPage'
