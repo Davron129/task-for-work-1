@@ -1,5 +1,5 @@
 import data from '../../shared/mock-data/data.json'
-import { TrackMap } from '../../components/track-map';
+import { TrackMap } from '../../features/track-map/components';
 import { IkmlPlacemarkList } from '../../shared/models';
 
 const coords = data.kmlFolder.kmlPlacemarkList;

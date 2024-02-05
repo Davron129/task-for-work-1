@@ -1,4 +1,4 @@
-import { PolygonDrawer } from "../../components/polygon-drawer"
+import { PolygonDrawer } from "../../features/polygon-drawer/components"
 
 export const PolygonDrawerPage = () => {
     return <PolygonDrawer />

@@ -1,7 +1,7 @@
 import React, { FC } from "react"
 import * as L from "leaflet";
 import { TileLayer, Polyline, CircleMarker, Marker, MapContainer, Pane } from "react-leaflet"
-import { IParkingPins, IkmlPlacemarkList } from "../../shared/models";
+import { IParkingPins, IkmlPlacemarkList } from "../../../shared/models";
 
 const defaultCenter: L.LatLngTuple = [67.85260009765625, 37.99032211303711];
 
